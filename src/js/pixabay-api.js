@@ -10,8 +10,4 @@ export function getImage(searchValue) {
             }
             return response.json();
         })
-        .catch(error => {
-            console.error('Error fetching images:', error);
-            throw error;
-        });
 }
