@@ -12,6 +12,11 @@ const links = {
     gallery: document.querySelector('.gallery'),
   };
   
+  let gallery = new SimpleLightbox('#gallery a', {
+        captionsData: 'alt',
+        captionDelay: 250,
+      });
+  
   function submitForm (event) {
     event.preventDefault();
     links.galleryEL.innerHTML = '<span class="loader"></span>';
@@ -40,12 +45,19 @@ const links = {
       links.galleryEL.innerHTML = '';
 
       getMarkup(data.hits, links.galleryEL);
-      let gallery = new SimpleLightbox('#gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
-      });
+      
       gallery.refresh();
-    });
+    })
+    .catch(error => {
+      iziToast.show({
+        title: '<div class="error-remark"><img src="./img/error.svg" alt="error" class="error-svg"><span class="error-text">An error occurred while fetching the images. Please try again later.</span></div>',
+        titleSize: '20px',
+        message: '',
+        backgroundColor: 'red',
+        position: 'topRight',
+      })
+      console.error('Error fetching images:', error);
+  });
     links.formEL.reset();
   }
   
