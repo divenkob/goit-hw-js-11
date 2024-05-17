@@ -22,6 +22,7 @@ const links = {
     links.galleryEL.innerHTML = '<span class="loader"></span>';
     const searchValue = links.inputEL.value.trim();
     if (searchValue === '') {
+      links.galleryEL.innerHTML = '';
       return iziToast.show({
         title: '<div class="error-remark"><img src="./img/error.svg" alt="error" class="error-svg"><span class="error-text">Introduction field please enter the value to search</span></div>',
         titleSize: '20px',
@@ -33,6 +34,7 @@ const links = {
   
     getImage(searchValue).then(data => {
       if (data.totalHits === 0) {
+        links.galleryEL.innerHTML = '';
         return iziToast.show({
           title: '<div class="error-remark"><img src="./img/error.svg" alt="error" class="error-svg"><span class="error-text">Sorry, there are no images matching your search query. Please try again!</span></div>',
           titleSize: '20px',
@@ -49,6 +51,7 @@ const links = {
       gallery.refresh();
     })
     .catch(error => {
+      links.galleryEL.innerHTML = '';
       iziToast.show({
         title: '<div class="error-remark"><img src="./img/error.svg" alt="error" class="error-svg"><span class="error-text">An error occurred while fetching the images. Please try again later.</span></div>',
         titleSize: '20px',
